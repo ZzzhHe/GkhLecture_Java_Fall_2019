@@ -42,7 +42,7 @@ public class Faction1 extends JFrame implements ActionListener {
                 try {
                     List<String> data = FileLoader.getTxt(srcFileName);
                     List<String> keyword = FileLoader.getTxt(t);
-                    LinkedHashMap<String,Integer> tm = StringStat.SearchKeyword(data,keyword);
+                    LinkedHashMap<String,Integer> tm = StringStat.SortKeyword(StringStat.SearchKeyword(data,keyword));
                     FileSaver.save(tm, "new.txt");
                 } catch (Exception ex) {
                     ex.printStackTrace();
