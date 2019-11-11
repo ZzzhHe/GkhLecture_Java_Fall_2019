@@ -44,6 +44,8 @@ public class Faction1 extends JFrame implements ActionListener {
                     List<String> keyword = FileLoader.getTxt(t);
                     LinkedHashMap<String,Integer> tm = StringStat.SortKeyword(StringStat.SearchKeyword(data,keyword));
                     FileSaver.save(tm, "new.txt");
+//                    String fileName = BarChart.Bar_Chart(tm);
+//                    System.out.println(fileName);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null,"异常操作");

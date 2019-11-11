@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileLoader {
-    public static List<String> getTxt(String srcFileName ) {
+    public static List<String> getTxt(String srcFileName ) throws Exception{
         File file = new File(srcFileName);
         LineNumberReader fileReader = null;
         List<String> words = new ArrayList<String>();
-        try {
             fileReader = new LineNumberReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
             String lineReader = null;
             while ( (lineReader = fileReader.readLine()) != null)
@@ -18,9 +17,6 @@ public class FileLoader {
                 words.add(lineReader);
             }
             fileReader.close();
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
         return words;
     }
 }

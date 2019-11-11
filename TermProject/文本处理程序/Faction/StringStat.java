@@ -4,7 +4,7 @@ import java.util.*;
 
 public class StringStat {
 
-    public static LinkedHashMap<String,Integer> SortKeyword(LinkedHashMap aWords) {
+    public static LinkedHashMap<String,Integer> SortKeyword(LinkedHashMap aWords) throws Exception{
         List<Map.Entry<String,Integer>> list = new ArrayList<Map.Entry<String, Integer>>(aWords.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
             @Override
@@ -15,12 +15,7 @@ public class StringStat {
         LinkedHashMap<String,Integer> lhm = new LinkedHashMap<String,Integer>();
         for( int i = 0; i < list.size(); i++)
         {
-            try {
                 lhm.put(list.get(i).getKey(),list.get(i).getValue());
-            }catch (Exception e)
-            {
-                e.printStackTrace();
-            }
             System.out.println(list.get(i).getKey()+":"+list.get(i).getValue());
         }
         return lhm;

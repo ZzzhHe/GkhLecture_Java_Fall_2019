@@ -29,19 +29,13 @@ public class FileOpe {
         }
     }
     //把Properties中的信息输出到文件中
-    private static void listInfo(){
+    private static void listInfo() throws Exception{
         PrintStream ps =null;
-        try {
             ps = new PrintStream(fileName);
             pps.list(ps);
-        }catch (Exception ex){
             JOptionPane.showMessageDialog(null,"文件操作异常");
             System.exit(0);
-        }finally {
-            try {
-                ps.close();
-            } catch (Exception ex) {}
-        }
+            ps.close();
     }
     //把存在文件中的信息读取到Conf中
     public static void getInfoByAccount(String account){
@@ -53,7 +47,7 @@ public class FileOpe {
         }
     }
     //把更新的数据重新写入到文件中
-    public static void updateCustomer(String account, String password){
+    public static void updateCustomer(String account, String password) throws Exception{
         pps.setProperty(account,password);
         listInfo();
     }

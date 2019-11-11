@@ -43,7 +43,11 @@ public class ModifyFrame extends JFrame implements ActionListener {
                 return;
             }
             String password = new String(pfPassword.getPassword());
-            FileOpe.updateCustomer(Conf.account,password);
+            try {
+                FileOpe.updateCustomer(Conf.account, password);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             JOptionPane.showMessageDialog(this,"成功修改");
             this.dispose();
         }
