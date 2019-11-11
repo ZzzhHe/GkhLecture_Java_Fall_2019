@@ -14,18 +14,20 @@ public class LoginFrame extends JFrame implements ActionListener {
     private JTextField tfAccount = new JTextField(10);
     private JLabel lbPassword = new JLabel("密  码：");
     private JPasswordField pfPassword = new JPasswordField(10);
+    private JLabel lbWelcome = new JLabel(new ImageIcon("C:\\Users\\wohez\\IdeaProjects\\TermProject\\welcome.jpg"));
     JButton btLogin = new JButton("登陆");
     JButton btExit = new JButton("退出");
     public LoginFrame() {
         super("登陆");
         this.setLayout(new FlowLayout());
+        this.add(lbWelcome);
         this.add(lbAccount);
         this.add(tfAccount);
         this.add(lbPassword);
         this.add(pfPassword);
         this.add(btLogin);
         this.add(btExit);
-        this.setSize(280, 160);
+        this.setSize(380, 160);
         GUIUtil.toCenter(this);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);

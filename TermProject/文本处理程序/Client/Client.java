@@ -1,5 +1,6 @@
 package Client;
 
+import Faction.*;
 import util.Conf;
 import util.GUIUtil;
 
@@ -10,10 +11,11 @@ import java.awt.event.ActionListener;
 import java.net.Socket;
 
 public class Client extends JFrame implements ActionListener {
-    private JLabel lbWelcome = new JLabel("欢迎"+ Conf.account + "登陆");
+    private JLabel lbWelcome = new JLabel(new ImageIcon("C:\\Users\\wohez\\IdeaProjects\\TermProject\\Client.jpg"));
     private JButton btConn = new JButton("连接服务器");
     private JButton btMod = new JButton("修改信息");
-    JButton btExit = new JButton("退出");
+    private JButton btCount = new JButton("查找（试验）");
+    private JButton btExit = new JButton("退出");
     private Socket socket;
     public Client() {
         super("用户界面");
@@ -22,6 +24,7 @@ public class Client extends JFrame implements ActionListener {
         this.add(btConn);
         this.add(btMod);
         this.add(btExit);
+        this.add(btCount);
         this.setSize(280, 160);
         GUIUtil.toCenter(this);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,6 +32,7 @@ public class Client extends JFrame implements ActionListener {
         btConn.addActionListener(this);
         btExit.addActionListener(this);
         btMod.addActionListener(this);
+        btCount.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -45,8 +49,11 @@ public class Client extends JFrame implements ActionListener {
         }else if ( ae.getSource() == btMod) {
             this.dispose();
             new ModifyFrame();
-        }else{
-            JOptionPane.showMessageDialog(this,"即将退出");
+        } else if (ae.getSource() == btCount ) {
+            this.dispose();
+            new Faction1();
+        } else {
+            JOptionPane.showMessageDialog(this, "即将退出");
             System.exit(0);
         }
     }

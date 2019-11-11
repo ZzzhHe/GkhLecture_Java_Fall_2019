@@ -10,11 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ModifyFrame extends JFrame implements ActionListener {
-    private JLabel lbAccount = new JLabel("您的账号"+"\n");
+    private JLabel lbAccount = new JLabel("   您的账号:                      ");
     private JLabel lbAccount2 = new JLabel(Conf.account);
-    private JLabel lbPassword = new JLabel("请设置您的密码");
+    private JLabel lbPassword = new JLabel("请设置您的密码:  ");
     private JPasswordField pfPassword = new JPasswordField(10);
-    private JLabel lbPassword2 = new JLabel("请确认您的密码");
+    private JLabel lbPassword2 = new JLabel("请确认您的密码:   ");
     private JPasswordField pfPassword2 = new JPasswordField(10);
     private JButton btSub = new JButton("提交修改");
     private JButton btCanc = new JButton("取消");
@@ -31,7 +31,6 @@ public class ModifyFrame extends JFrame implements ActionListener {
         this.setSize(240, 180);
         GUIUtil.toCenter(this);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
         this.setVisible(true);
         btSub.addActionListener(this);
         btCanc.addActionListener(this);
