@@ -56,8 +56,6 @@ public class Server extends JFrame implements ActionListener{
             br.close();
             bw.close();
 
-                // TODO: 2019/11/11
-                //服务器把文件读取，并把文件传输到客户端
         }catch (Exception ex)
         {
             ex.printStackTrace();

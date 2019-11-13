@@ -43,6 +43,7 @@ public class Faction1 extends JFrame implements ActionListener {
                     List<String> data = FileLoader.getTxt(srcFileName);
                     List<String> keyword = FileLoader.getTxt(t);
                     LinkedHashMap<String,Integer> tm = StringStat.SortKeyword(StringStat.SearchKeyword(data,keyword));
+                    BarChart.Bar_Chart(tm);
                     FileSaver.save(tm, "new.txt");
 //                    String fileName = BarChart.Bar_Chart(tm);
 //                    System.out.println(fileName);

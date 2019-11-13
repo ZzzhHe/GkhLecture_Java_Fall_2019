@@ -64,7 +64,6 @@ public class Client extends JFrame implements ActionListener {
                 String str = null;
                 while( (str = br.readLine()) != null ){
                     bw.write(str);
-                    System.out.println(str);
                     bw.write(System.getProperty("line.separator"));
                     bw.flush();
                 }
@@ -72,11 +71,15 @@ public class Client extends JFrame implements ActionListener {
                 br.close();
             } catch (Exception e) { }
         }
+
         else if ( ae.getSource() == btMod) {
             this.dispose();
             new ModifyFrame();
         } else if (ae.getSource() == btCount ) {
             this.dispose();
+            // TODO: 2019/11/13
+//              1.删除Faction1中要求用户输入的功能，直接从（服务器下载的）文档中读取
+
             new Faction1();
         } else {
             JOptionPane.showMessageDialog(this, "即将退出");
