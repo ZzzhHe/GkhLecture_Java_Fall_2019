@@ -12,12 +12,16 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+
+// TODO: 2019/11/21
+//      尝试使用Orson Chart构造三地图
 
 public class BarChart {
 
@@ -59,21 +63,21 @@ public class BarChart {
         chart.setBackgroundPaint(new Color(255, 255, 255));
         // 设置图例字体
         LegendTitle legend = chart.getLegend(0);
-        legend.setItemFont(new Font("宋体", Font.TRUETYPE_FONT, 14));
+        legend.setItemFont(new Font("宋体", Font.TRUETYPE_FONT, 10));
         // 获得柱状图的Plot对象
         CategoryPlot plot = chart.getCategoryPlot();
         BarRenderer3D customBarRenderer = (BarRenderer3D) plot.getRenderer();
         // 取得横轴
         CategoryAxis categoryAxis = plot.getDomainAxis();
         // 设置横轴显示标签的字体
-        categoryAxis.setLabelFont(new Font("宋体", Font.BOLD, 16));
+        categoryAxis.setLabelFont(new Font("宋体", Font.BOLD, 12));
         // 设置横轴标记的字体
-        categoryAxis.setTickLabelFont(new Font("宋休", Font.TRUETYPE_FONT, 16));
+        categoryAxis.setTickLabelFont(new Font("宋休", Font.TRUETYPE_FONT, 12));
         // 取得纵轴
         NumberAxis numberAxis = (NumberAxis) plot.getRangeAxis();
         // 设置纵轴显示标签的字体
-        numberAxis.setLabelFont(new Font("宋体", Font.BOLD, 16));
-        numberAxis.setTickLabelFont(new Font("宋体", Font.PLAIN, 13));
+        numberAxis.setLabelFont(new Font("宋体", Font.BOLD, 12));
+        numberAxis.setTickLabelFont(new Font("宋体", Font.PLAIN, 9));
 //        customBarRenderer.setBase(new StandardCategoryItemLabelGenerator());// 显示每个柱的数值
 //        customBarRenderer.setBaseItemLabelsVisible(true);
         // 注意：此句很关键，若无此句，那数字的显示会被覆盖，给人数字没有显示出来的问题
@@ -103,20 +107,14 @@ public class BarChart {
     }
 
     public static void writeChartToImage( JFreeChart chart ) {
-        FileOutputStream fos_jpg = null;
+        File f_jpg = null;
         try {
-            fos_jpg = new FileOutputStream("C:\\Users\\wohez\\IdeaProjects\\TermProject\\BarGraph.jpg");
-            ChartUtils.writeChartAsJPEG(fos_jpg,1,chart,400,300,null);
+            f_jpg = new File("C:\\Users\\wohez\\IdeaProjects\\TermProject\\BarGraph.jpg");
+            ChartUtils.saveChartAsJPEG(f_jpg,1.0f,chart,1500,800,null);
 
         } catch (Exception e) {
 
             e.printStackTrace();
-
-            try {
-                fos_jpg.close();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
         }
 
     }

@@ -17,7 +17,9 @@ public class Faction1 extends JFrame implements ActionListener {
     private JButton btCount = new JButton("存在感");
     private JButton btUpload = new JButton("上传柱状图");
     private JButton btCancel = new JButton("取消");
-
+//+++++++++++++++++++++++++++++++++++++++++
+    private Socket socket;
+//-----------------------------------------
     public Faction1() {
         super("判断存在感");
         this.setLayout(new FlowLayout());
@@ -32,6 +34,16 @@ public class Faction1 extends JFrame implements ActionListener {
         btCancel.addActionListener(this);
         btCount.addActionListener(this);
         btUpload.addActionListener(this);
+//+++++++++++++++++++++++++++++++++++++++++
+        try{
+            socket = new Socket("127.0.0.1",9999);
+            JOptionPane.showMessageDialog(this,"连接成功");
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+//-----------------------------------------
+
     }
         public void actionPerformed (ActionEvent ae ){
             if (ae.getSource() == btCancel)
@@ -58,7 +70,9 @@ public class Faction1 extends JFrame implements ActionListener {
                 }
                 JOptionPane.showMessageDialog(null,"输出完毕");
             } else if (ae.getSource() == btUpload) {
-                Client.UploadJpg();
+//+++++++++++++++++++++++++++++++++++++++++
+                Upload.jpgUpload(socket);
+//-----------------------------------------
             }
 
 

@@ -69,6 +69,7 @@ public class Client extends JFrame implements ActionListener {
     }
 
     public static void UploadJpg() {
+        System.out.println("准备上传图片");
 //        Upload.jpgUpload(socket);
     }
 }
