@@ -20,17 +20,19 @@
   </component>
   <component name="ProjectId" id="1TP7XSDyh31UBvt0ddL1TPBx8CR" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jfreechart-1.5.0-sources.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../orsoncharts-1.6" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Faction2" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\wohez\IdeaProjects\TermProject\lib" />
       <recent name="C:\Users\wohez\IdeaProjects\TermProject" />
       <recent name="C:\Users\wohez\IdeaProjects\TermProject\src\Client" />
       <recent name="C:\Users\wohez\IdeaProjects\TermProject\src\util" />
@@ -49,12 +51,12 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.LoginFrame">
-    <configuration name="Graph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Faction2.Graph" />
+    <configuration name="Classify" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Faction3.Classify" />
       <module name="TermProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Faction2.*" />
+          <option name="PATTERN" value="Faction3.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -92,7 +94,7 @@
       <list>
         <item itemvalue="Application.LoginFrame" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="Application.Graph" />
+        <item itemvalue="Application.Classify" />
       </list>
     </recent_temporary>
   </component>
@@ -108,5 +110,27 @@
       <updated>1573349915426</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/util/colorSet.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TermProject$Server.ic" NAME="Server Coverage Results" MODIFIED="1574561160595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TermProject$Classify.ic" NAME="Classify Coverage Results" MODIFIED="1574670133050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Faction3.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TermProject$LoginFrame.ic" NAME="LoginFrame Coverage Results" MODIFIED="1574561119136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Client.*</FILTER>
+    </SUITE>
   </component>
 </project>

@@ -1,139 +1,135 @@
 package Faction2;
 
-import javax.imageio.ImageIO;
-import javax.lang.model.element.Name;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.LinkedHashMap;
+import java.util.Set;
+
+import org.jfree.chart.*;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
+import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.data.category.DefaultCategoryDataset;
 import util.colorSet;
 
 
-public class Graph extends JFrame {
-    private static final int sx = 40;
-    private static final int sy = 80;
-    private static final int w = 40;
-    private static final int rw = 400;
+public class Graph{
 
+    //根据密度画出人物密度图
+    public Graph(LinkedHashMap<Integer,Integer> lhm){
+        //获取数据
+        DefaultCategoryDataset dcd = getDataSet(lhm);
 
-    // TODO: 2019/11/18
-//        实现用颜色深浅表示密度，最好是用方块的形式
-    private Graphics g;
-    public PanelPaint pp = new PanelPaint();
+        //把人物密度信息用arrayI保存
+        Set<Integer> s = lhm.keySet();
+        Integer[] arrayI = s.toArray(new Integer[s.size()]);
 
-    public Graph()  {
-        super("密度图");
-        this.add(pp);
-        setBounds(200, 200, 500, 300);
-        setVisible(true);
-        g = this.getGraphics();
-        repaint();
+        //画图
+        String title = "人物密度图";
+        JFreeChart chart = ChartFactory.createBarChart(
+                title,
+                "Characters",
+                "times",
+                dcd,
+                PlotOrientation.VERTICAL,
+                false,
+                false,
+                false
+        );
+
+        //设置字体格式
+        Font font = new Font("宋体", Font.BOLD, 12);
+
+        //获取标题信息并设置标题字体
+        TextTitle textTitle = new TextTitle(title);
+        chart.setTitle(textTitle);
+        textTitle.setFont(font);
+
+        chart.setTextAntiAlias(false);
+
+        //设置图表格式
+        StandardChartTheme sct = new StandardChartTheme("CN");
+        //设置字体
+        sct.setRegularFont(font);
+        sct.setLargeFont(font);
+
+        //绑定
+        ChartFactory.setChartTheme(sct);
+
+        //获得图像信息，并设置
+        CategoryPlot plot = chart.getCategoryPlot();
+        CategoryAxis categoryAxis = plot.getDomainAxis();
+        // 设置横轴显示标签的字体
+        categoryAxis.setLabelFont(font);
+        categoryAxis.setTickLabelFont(font);
+
+        //柱状图渲染器
+        BarRenderer br = (BarRenderer) plot.getRenderer();
+        br.setIncludeBaseInRange(true);
+        br.setBarPainter(new StandardBarPainter());
+        // 标签生成器
+        br.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+        br.setDefaultItemLabelsVisible(true);
+
+        //设置柱状图间距和宽度
+//        br.setItemMargin(0.1F);
+//        br.setMaximumBarWidth(0.9);
+
+        //对每个series设置颜色
+        for(int i = 0; i < s.size(); i++)
+        {
+            br.setSeriesPaint(i,colorSet.setColor((int)lhm.get(arrayI[i])));
+        }
+
+        //显示出柱状图 在JFrame中
+        ChartFrame pieFrame = new ChartFrame("存在感柱状图",chart);
+        pieFrame.pack();
+        pieFrame.setVisible(true);
+
+        //保存柱状图
+        writeChartToImage (chart);
+    }
+
+    //获取信息存入dataSet
+    public static DefaultCategoryDataset getDataSet(LinkedHashMap aWords) {
+        DefaultCategoryDataset defaultDataset = new DefaultCategoryDataset();
+
+        //用Set存储key
+        Set<Integer> s = aWords.keySet();
+        Integer[] arrayI = s.toArray(new Integer[s.size()]);
+//        toArray()返回的类型时 Object [] 所以会报错，要把s.toArray()-->s.toArray(new String[s.size()])
+
+        //setValue的同时也要设置series，为之后的颜色设置做准备
+        for (Integer i = 0; i < aWords.size(); i++) {
+            int tt = arrayI[i] + 1;
+            defaultDataset.setValue(( int )aWords.get(arrayI[i]), i.toString(), "第"+tt+"部分");
+        }
+
+        return defaultDataset;
+    }
+
+    //保存图片
+    public static void writeChartToImage( JFreeChart chart ) {
+        File f_jpg = null;
         try {
-            Thread.sleep(2000);
-            BufferedImage screencapture = new Robot().createScreenCapture(
-                    new Rectangle( 230, 230, 450, 250 ));
-            ImageIO.write(screencapture,"JPEG",new File("Graph.jpg"));
+            f_jpg = new File("C:\\Users\\wohez\\IdeaProjects\\TermProject\\Graph.jpg");
+            ChartUtils.saveChartAsJPEG(f_jpg,1.0f,chart,1500,800,null);
+
         } catch (Exception e) {
+
             e.printStackTrace();
         }
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
-
-
-
-
-    public static void main(String[] args) {
-        new Graph();
-    }
 }
-
-
-    class PanelPaint extends JPanel {
-        private static final int sx = 40;
-        private static final int sy = 80;
-        private static final int w = 40;
-        private static final int rw = 400;
-
-
-        public void paint(Graphics g) {
-
-            super.paint(g);
-            Graphics2D g2d = (Graphics2D) g;
-            Graphics2D g2d2 = (Graphics2D) g;
-
-            g2d.setStroke(new BasicStroke(4.0F));
-            g2d.setColor(Color.PINK);
-
-
-            for (int i = 0; i < 11; i++) {
-                g2d.drawLine(sx + (i * w), sy, sx + (i * w), sy + 80);
-            }
-            for (int i = 0; i < 3; i++) {
-                g2d.drawLine(sx, sy + (i * w), sx + rw, sy + (i * w));
-            }
-
-
-
-            // TODO: 2019/11/18
-//                    创造函数，传递参数，接收参数，转换颜色，setColor
-//              1.创造函数
-//              2.传递参数，在paint()函数中调用函数
-//              3.接受参数，获得参数 章节数？出现次数？
-//              4.把出现次数传入颜色函数，得到RGB对应的颜色
-
-            LinkedHashMap lmp = Search.DensitySearch(Faction2.name);
-            for(int i = 0; i < 20; i++)
-            {
-                int times = 0;
-                try {
-                    times = (Integer)lmp.get(i);
-                    System.out.println(times+"啊");
-                }catch (Exception e )
-                {
-                    e.printStackTrace();
-                }
-                // TODO: 2019/11/19
-//                    颜色的设计不够美丽
-//                    传出的RGB到底是什么形式
-//                    如何保存图像
-                g2d2.setStroke(new BasicStroke(38.0F));
-                g2d2.setColor(colorSet.setColor(times));
-                if( i < 10)
-                {
-                    g2d2.drawLine(sx + w  / 2 + w * i , sy + w / 2  , sx + w / 2 + w * i, sy + 20);
-                }
-                else if ( i >= 10)
-                {
-                    g2d2.drawLine(sx + w  / 2 + w * ( i - 10 ) , sy + w / 2 + 40, sx + w / 2 + w * (i - 10), sy + 60);
-                }
-            }
-        }
-    }
-
-/*
-class PaintColor {
-    private static final int sx = 40;
-    private static final int sy = 80;
-    private static final int w = 40;
-    private static final int rw = 400;
-
-    private Graphics g;
-
-
-    public static void paintRec(int i, int times) {
-        try {
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setStroke(new BasicStroke(40.0F));
-            g2d.setColor(Color.PINK);
-            g2d.drawLine(sx + (i * w), sy, sx + (i * w), sy + 80);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-*/
 
 
 
